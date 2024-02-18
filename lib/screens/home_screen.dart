@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:rive/rive.dart';
+import 'package:taskly/widgets/progress.dart';
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -30,6 +31,8 @@ class HomeScreen extends StatelessWidget {
                     color: Theme.of(context).colorScheme.primary,
                   ),
             ),
+            const SizedBox(height: 28.0),
+            Progress()
           ],
         ),
       ),
