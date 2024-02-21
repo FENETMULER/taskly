@@ -13,12 +13,22 @@ class TasksNotifier extends StateNotifier<List<Task>> {
     state = state.where((item) => item.id != id).toList();
   }
 
-  void updateTask(String id, String newName) {
+  void updateTask(String id, String newName, bool checked) {
     state = state.map((task) {
       if (task.id == id) {
         return Task(id: task.id, title: newName);
       } else {
         return task;
+      }
+    }).toList();
+  }
+
+  void toggleChecked(Task task) {
+    state = state.map((item) {
+      if (item.id == task.id) {
+        return Task(id: task.id, title: task.title, checked: !task.checked);
+      } else {
+        return item;
       }
     }).toList();
   }
