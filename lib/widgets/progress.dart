@@ -1,14 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter_animate/flutter_animate.dart';
+import 'package:taskly/providers/tasks_provider.dart';
 
-class Progress extends StatelessWidget {
-  const Progress({super.key});
+class Progress extends ConsumerWidget {
+  Progress({super.key});
+
+  late String statusText;
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final tasks = ref.watch(tasksProvider);
+    final totalTasks = tasks.length;
+    final checkedTasks = tasks.where((task) => task.checked).length;
     final formattedDate = DateFormat('MMM d, yyyy').format(DateTime.now());
+
+    if (totalTasks == 0) {
+      statusText = 'No Tasks Yet';
+    } else if (checkedTasks == totalTasks) {
+      statusText = 'All Tasks Completed!';
+    } else {
+      statusText = '$checkedTasks of $totalTasks tasks completed';
+    }
+
     return Column(children: [
-      Text('3 of 9', style: Theme.of(context).textTheme.headlineSmall),
+      Text(statusText,
+          style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+              color: totalTasks != 0 && checkedTasks == totalTasks
+                  ? Color.fromARGB(255, 63, 81, 240)
+                  : null)),
       const SizedBox(height: 5),
       Container(
         width: 400.0,
@@ -19,7 +40,7 @@ class Progress extends StatelessWidget {
         ),
         alignment: Alignment.centerLeft,
         child: FractionallySizedBox(
-          widthFactor: 0.33,
+          widthFactor: totalTasks == 0 ? 0 : checkedTasks / totalTasks,
           child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10.0),
