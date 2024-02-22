@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
-
 class Task {
-  Task({required this.title}) : id = UniqueKey().toString();
+  Task({required this.id, required this.title, bool? checked})
+      : checked = checked ?? false;
 
   final String id;
   final String title;
+  bool checked;
 }
