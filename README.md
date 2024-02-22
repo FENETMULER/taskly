@@ -1,3 +1,3 @@
 # taskly
 
-A simple, task app originally built for the _zeepalm_ flutter challenge.
+A task application originally built for the **zeepalm** flutter challenge.
