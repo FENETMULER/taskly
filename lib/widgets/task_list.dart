@@ -13,10 +13,13 @@ class TaskList extends ConsumerWidget {
       height: 500,
       width: 500,
       child: ListView.builder(
-          itemCount: tasks.length,
-          itemBuilder: ((context, index) => Align(
-              alignment: Alignment.center,
-              child: TaskItem(task: tasks[index])))),
+        itemCount: tasks.length,
+        itemBuilder: (context, index) => Align(
+          key: ValueKey(tasks[index].id),
+          alignment: Alignment.center,
+          child: TaskItem(task: tasks[index]),
+        ),
+      ),
     );
   }
 }
