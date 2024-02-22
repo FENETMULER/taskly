@@ -48,7 +48,7 @@ class _TaskItemState extends ConsumerState<TaskItem> {
           child: SizedBox(
             height: 38,
             width: 38,
-            child: RiveAnimation.asset('assets/floating.riv',
+            child: RiveAnimation.asset('assets/animations.riv',
                 artboard: 'trash',
                 animations: ['delete'],
                 fit: BoxFit.scaleDown),
@@ -77,7 +77,7 @@ class _TaskItemState extends ConsumerState<TaskItem> {
               child: GestureDetector(
                 onTap: _checkboxClickHandler,
                 child: RiveAnimation.asset(
-                  'assets/floating.riv',
+                  'assets/animations.riv',
                   artboard: 'checkbox',
                   onInit: _onRiveInit,
                 ),

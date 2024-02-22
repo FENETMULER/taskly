@@ -61,23 +61,21 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
         children: [
           SizedBox(
             width: double.infinity,
-            child: SingleChildScrollView(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 15.0),
-                  Text(
-                    'Taskly.',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                  ),
-                  const SizedBox(height: 28.0),
-                  Progress(),
-                  const SizedBox(height: 15.0),
-                  TaskList()
-                ],
-              ),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                const SizedBox(height: 15.0),
+                Text(
+                  'Taskly.',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                ),
+                const SizedBox(height: 28.0),
+                Progress(),
+                const SizedBox(height: 15.0),
+                TaskList()
+              ],
             ),
           ),
           if (_showNewTaskDialog)
@@ -132,7 +130,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             height: 100,
             width: 100,
             child: RiveAnimation.asset(
-              'assets/floating.riv',
+              'assets/animations.riv',
               artboard: 'Add Task',
               onInit: _onRiveInit,
             )),

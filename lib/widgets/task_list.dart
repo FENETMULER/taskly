@@ -9,18 +9,28 @@ class TaskList extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final tasks = ref.watch(tasksProvider);
+    final remainingSpace = MediaQuery.of(context).size.height -
+        192; // 140 is the total height of the widgets above task list
     return SizedBox(
-      height: MediaQuery.of(context).size.height -
-          140, // 140 is the total height of widgets above task list
+      height: remainingSpace,
       width: 500,
-      child: ListView.builder(
-        itemCount: tasks.length,
-        itemBuilder: (context, index) => Align(
-          key: ValueKey(tasks[index].id),
-          alignment: Alignment.center,
-          child: TaskItem(task: tasks[index]),
-        ),
-      ),
+      child: tasks.isEmpty
+          ? Padding(
+              padding: EdgeInsets.only(bottom: remainingSpace / 2),
+              child: Center(
+                child: Text('Add a task to get started',
+                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                        color: const Color.fromARGB(255, 158, 158, 158))),
+              ),
+            )
+          : ListView.builder(
+              itemCount: tasks.length,
+              itemBuilder: (context, index) => Align(
+                key: ValueKey(tasks[index].id),
+                alignment: Alignment.center,
+                child: TaskItem(task: tasks[index]),
+              ),
+            ),
     );
   }
 }

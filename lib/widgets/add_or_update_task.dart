@@ -62,26 +62,30 @@ class AddOrUpdateTask extends ConsumerWidget {
           const SizedBox(height: 15.0),
           GestureDetector(
             onTap: () {
-              if (taskId == null) {
-                ref
-                    .read(tasksProvider.notifier)
-                    .addNewTask(_taskTextFieldController.text);
-              } else {
-                ref.read(tasksProvider.notifier).updateTask(
-                    taskId!, _taskTextFieldController.text, checked!);
-                ref.read(updateProvider.notifier).enableUpdate(
-                    taskId!, _taskTextFieldController.text, checked!);
+              if (_taskTextFieldController.text.isNotEmpty) {
+                if (taskId == null) {
+                  ref
+                      .read(tasksProvider.notifier)
+                      .addNewTask(_taskTextFieldController.text);
+                } else {
+                  ref.read(tasksProvider.notifier).updateTask(
+                      taskId!, _taskTextFieldController.text, checked!);
+                  ref.read(updateProvider.notifier).enableUpdate(
+                      taskId!, _taskTextFieldController.text, checked!);
+                }
+                // ref.read(updateProvider.notifier).disableUpdate();
+                Future.delayed(const Duration(seconds: 1), () {
+                  ref
+                      .read(clearDialogsProvider.notifier)
+                      .changeDialogState(true);
+                });
+                _triggerClick();
               }
-              // ref.read(updateProvider.notifier).disableUpdate();
-              Future.delayed(const Duration(seconds: 1), () {
-                ref.read(clearDialogsProvider.notifier).changeDialogState(true);
-              });
-              _triggerClick();
             },
             child: SizedBox(
               height: 60,
               width: 180,
-              child: RiveAnimation.asset('assets/floating.riv',
+              child: RiveAnimation.asset('assets/animations.riv',
                   artboard:
                       taskId == null ? 'Add Task Button' : 'Update Task Button',
                   onInit: _onRiveInit,
