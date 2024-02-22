@@ -16,7 +16,7 @@ class TasksNotifier extends StateNotifier<List<Task>> {
   void updateTask(String id, String newName, bool checked) {
     state = state.map((task) {
       if (task.id == id) {
-        return Task(id: task.id, title: newName);
+        return Task(id: task.id, title: newName, checked: checked);
       } else {
         return task;
       }
