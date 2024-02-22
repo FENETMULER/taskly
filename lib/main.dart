@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:taskly/screens/home_screen.dart';
 
-void main() => runApp(const App());
+void main() => runApp(const ProviderScope(child: App()));
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,6 +10,7 @@ class App extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        title: 'Taskly',
         theme: ThemeData(
           colorScheme: const ColorScheme.light(
             primary: Color(0xFF335EF9),
@@ -35,6 +36,7 @@ class App extends StatelessWidget {
             ),
           ),
         ),
+        debugShowCheckedModeBanner: false,
         home: HomeScreen());
   }
 }

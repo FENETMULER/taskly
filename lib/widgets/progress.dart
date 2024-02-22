@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:flutter_animate/flutter_animate.dart';
 import 'package:taskly/providers/tasks_provider.dart';
 
 class Progress extends ConsumerWidget {
   Progress({super.key});
 
-  late String statusText;
+  late String _statusText;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -17,18 +16,18 @@ class Progress extends ConsumerWidget {
     final formattedDate = DateFormat('MMM d, yyyy').format(DateTime.now());
 
     if (totalTasks == 0) {
-      statusText = 'No Tasks Yet';
+      _statusText = 'No Tasks Yet';
     } else if (checkedTasks == totalTasks) {
-      statusText = 'All Tasks Completed!';
+      _statusText = 'All Tasks Completed!';
     } else {
-      statusText = '$checkedTasks of $totalTasks tasks completed';
+      _statusText = '$checkedTasks of $totalTasks tasks completed';
     }
 
     return Column(children: [
-      Text(statusText,
+      Text(_statusText,
           style: Theme.of(context).textTheme.headlineSmall!.copyWith(
               color: totalTasks != 0 && checkedTasks == totalTasks
-                  ? Color.fromARGB(255, 63, 81, 240)
+                  ? const Color.fromARGB(255, 63, 81, 240)
                   : null)),
       const SizedBox(height: 5),
       Container(
@@ -49,9 +48,9 @@ class Progress extends ConsumerWidget {
         ),
       ),
       Align(
-          alignment: Alignment.centerRight,
+          alignment: Alignment.center,
           child: Padding(
-            padding: const EdgeInsets.only(top: 5.0, right: 55.0),
+            padding: const EdgeInsets.only(top: 10.0, left: 300),
             child: Text(formattedDate,
                 style: Theme.of(context).textTheme.titleSmall),
           )),
