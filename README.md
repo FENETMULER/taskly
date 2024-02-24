@@ -1,4 +1,4 @@
 # Taskly.
 
-A task application originally built for the **zeepalm** flutter challenge.
+An interactive and minimalistic task application.
 (**All assets used in this project were illustrated and animated by myself for this specific application**)
