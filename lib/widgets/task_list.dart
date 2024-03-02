@@ -8,6 +8,7 @@ class TaskList extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final width = MediaQuery.of(context).size.width;
     final tasks = ref.watch(tasksProvider);
     final remainingSpace = MediaQuery.of(context).size.height -
         192; // 192 is the total height of the widgets above task list
@@ -18,9 +19,14 @@ class TaskList extends ConsumerWidget {
           ? Padding(
               padding: EdgeInsets.only(bottom: remainingSpace / 2),
               child: Center(
-                child: Text('Add a task to get started',
-                    style: Theme.of(context).textTheme.titleLarge!.copyWith(
-                        color: const Color.fromARGB(255, 158, 158, 158))),
+                child: Text(
+                  'Add a task to get started',
+                  style: Theme.of(context).textTheme.titleLarge!.copyWith(
+                      color: const Color.fromARGB(255, 158, 158, 158),
+                      fontSize: width < 425
+                          ? 20
+                          : Theme.of(context).textTheme.titleLarge!.fontSize),
+                ),
               ),
             )
           : ListView.builder(
